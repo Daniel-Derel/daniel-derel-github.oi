@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Security Architecture</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#07111f;color:#eaf4ff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;width:100%;z-index:10;background:rgba(7,17,31,.88);backdrop-filter:blur(12px);border-bottom:1px solid #183452}
+.navin{max-width:1150px;margin:auto;padding:16px 22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;color:#35c8ff;letter-spacing:1px}
+nav ul{display:flex;gap:20px;list-style:none;flex-wrap:wrap}
+nav li a{color:#c8d9e8;font-size:14px}
+nav li a:hover{color:#35c8ff}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 20px 70px;background:radial-gradient(circle at 50% 25%,#12395b 0,#07111f 48%,#040a12 100%)}
+.hero .box{max-width:900px}
+.badge{display:inline-block;padding:7px 14px;border:1px solid #1d6d9b;border-radius:30px;color:#5bd2ff;background:#0a2033;margin-bottom:20px;font-size:13px}
+h1{font-size:clamp(38px,7vw,76px);line-height:1.05;margin-bottom:20px}
+.grad{color:#45d2ff}
+.hero p{max-width:720px;margin:0 auto 30px;color:#a9bfd2;font-size:18px}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;background:#17a9df;color:white;font-weight:700;margin:5px;box-shadow:0 0 25px #17a9df33}
+.btn.alt{background:transparent;border:1px solid #285272}
+section{max-width:1150px;margin:auto;padding:95px 22px}
+.section-title{font-size:35px;margin-bottom:10px}
+.lead{color:#9fb5c8;max-width:760px;margin-bottom:35px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:linear-gradient(145deg,#0b1d30,#091624);border:1px solid #173752;border-radius:16px;padding:24px;box-shadow:0 10px 35px #0004}
+.card h3{color:#55d1ff;margin-bottom:10px}
+.card p,.card li{color:#abc0d0}
+.card ul{padding-left:20px}
+.topology{margin-top:30px;padding:25px;background:#050d17;border:1px solid #1a405e;border-radius:18px;overflow:auto}
+.diagram{min-width:720px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.node{padding:13px 22px;border:1px solid #38bff5;background:#0b2337;border-radius:10px;text-align:center;min-width:150px}
+.row{display:flex;gap:25px;justify-content:center;align-items:center;flex-wrap:wrap}
+.line{width:2px;height:28px;background:#2fbce9}
+.line.h{width:55px;height:2px}
+.arrow{color:#48d3ff;font-size:22px}
+.wide{min-width:210px}
+.note{border-left:4px solid #28b9ee;padding:14px 18px;background:#0b1d2e;color:#bcd0df;border-radius:7px;margin-top:25px}
+footer{text-align:center;padding:35px 20px;border-top:1px solid #17334a;color:#7891a5}
+@media(max-width:700px){nav ul{display:none}.navin{justify-content:center}.diagram{min-width:600px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="navin">
+    <div class="logo">NETSEC // TKJ</div>
+    <ul>
+      <li><a href="#dmz">DMZ</a></li>
+      <li><a href="#zero-trust">Zero Trust</a></li>
+      <li><a href="#wireless">Wireless</a></li>
+      <li><a href="#kesimpulan">Kesimpulan</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="box">
+    <span class="badge">NETWORK SECURITY ARCHITECTURE</span>
+    <h1>Perancangan <span class="grad">Arsitektur Jaringan Keamanan</span></h1>
+    <p>Studi konseptual mengenai DMZ, Zero Trust Architecture, dan desain jaringan nirkabel aman untuk membangun infrastruktur jaringan yang tersegmentasi dan terkontrol.</p>
+    <a class="btn" href="#dmz">Mulai Studi</a>
+    <a class="btn alt" href="#wireless">Lihat Topologi</a>
+  </div>
+</header>
+
+<section id="dmz">
+  <h2 class="section-title">01 — Perancangan Topologi DMZ</h2>
+  <p class="lead">DMZ (Demilitarized Zone) merupakan area jaringan terpisah untuk menempatkan layanan yang perlu diakses dari jaringan luar tanpa memberikan akses langsung ke jaringan internal.</p>
+  <div class="grid">
+    <div class="card"><h3>Firewall</h3><p>Mengatur lalu lintas antara Internet, DMZ, dan jaringan internal berdasarkan aturan keamanan.</p></div>
+    <div class="card"><h3>Server DMZ</h3><p>Web, DNS, atau layanan publik ditempatkan di zona terisolasi sehingga risiko terhadap LAN dapat dikurangi.</p></div>
+    <div class="card"><h3>LAN Internal</h3><p>Berisi perangkat dan server internal yang mendapat perlindungan lebih ketat dari jaringan publik.</p></div>
+  </div>
+  <div class="topology">
+    <div class="diagram">
+      <div class="node wide">🌐 INTERNET</div><div class="arrow">↓</div>
+      <div class="node wide">🛡️ FIREWALL / ROUTER</div>
+      <div class="row"><span class="arrow">↙</span><span class="arrow">↘</span></div>
+      <div class="row">
+        <div>
+          <div class="node">DMZ</div>
+          <div class="line"></div>
+          <div class="row"><div class="node">Web Server</div><div class="node">DNS Server</div><div class="node">Mail Server</div></div>
+        </div>
+        <div>
+          <div class="node">LAN INTERNAL</div>
+          <div class="line"></div>
+          <div class="row"><div class="node">PC / Client</div><div class="node">File Server</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="zero-trust">
+  <h2 class="section-title">02 — Zero Trust Architecture</h2>
+  <p class="lead">Zero Trust menggunakan prinsip “Never Trust, Always Verify”. Setiap pengguna, perangkat, dan akses harus diverifikasi sesuai identitas, kondisi perangkat, dan hak akses.</p>
+  <div class="grid">
+    <div class="card"><h3>🔐 Verify Explicitly</h3><p>Verifikasi identitas dan konteks akses sebelum memberikan izin.</p></div>
+    <div class="card"><h3>🧩 Least Privilege</h3><p>Berikan hak akses seminimal mungkin sesuai kebutuhan pengguna.</p></div>
+    <div class="card"><h3>📊 Continuous Monitoring</h3><p>Pantau aktivitas jaringan dan evaluasi akses secara berkelanjutan.</p></div>
+    <div class="card"><h3>🧱 Segmentation</h3><p>Pisahkan jaringan berdasarkan fungsi untuk membatasi pergerakan ancaman.</p></div>
+  </div>
+  <div class="topology">
+    <div class="diagram">
+      <div class="node wide">🌐 INTERNET / USER</div><div class="arrow">↓</div>
+      <div class="node wide">🔐 IDENTITY & ACCESS GATEWAY</div><div class="arrow">↓</div>
+      <div class="row">
+        <div class="node">VLAN STAFF</div><div class="node">VLAN SERVER</div><div class="node">VLAN GUEST</div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="node wide">📊 MONITORING / LOG / POLICY</div>
+    </div>
+  </div>
+</section>
+
+<section id="wireless">
+  <h2 class="section-title">03 — Desain Konseptual Jaringan Nirkabel Aman</h2>
+  <p class="lead">Jaringan Wi-Fi aman dirancang dengan segmentasi SSID/VLAN, autentikasi yang kuat, firewall, dan jaringan tamu yang dipisahkan dari jaringan internal.</p>
+  <div class="grid">
+    <div class="card"><h3>Wi-Fi Internal</h3><p>SSID khusus staf/perangkat resmi dengan autentikasi dan kebijakan akses internal.</p></div>
+    <div class="card"><h3>Guest Wi-Fi</h3><p>SSID tamu menggunakan VLAN terpisah dan tidak dapat mengakses perangkat internal.</p></div>
+    <div class="card"><h3>Keamanan</h3><p>Gunakan WPA2/WPA3, kata sandi kuat, pembaruan firmware, dan monitoring perangkat.</p></div>
+  </div>
+  <div class="topology">
+    <div class="diagram">
+      <div class="node wide">🌐 INTERNET</div><div class="arrow">↓</div>
+      <div class="node wide">🛡️ FIREWALL / ROUTER</div><div class="arrow">↓</div>
+      <div class="node wide">📡 ACCESS POINT</div>
+      <div class="row"><span class="arrow">↙</span><span class="arrow">↘</span></div>
+      <div class="row">
+        <div><div class="node">🔒 SSID INTERNAL</div><div class="line"></div><div class="node">Laptop / Staff</div></div>
+        <div><div class="node">👥 SSID GUEST</div><div class="line"></div><div class="node">Guest Devices</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="note"><strong>Catatan:</strong> Dalam implementasi nyata, VLAN, firewall rules, autentikasi, dan monitoring harus disesuaikan dengan kebutuhan organisasi serta perangkat yang digunakan.</div>
+</section>
+
+<section id="kesimpulan">
+  <h2 class="section-title">04 — Kesimpulan</h2>
+  <div class="card">
+    <p>Arsitektur keamanan yang baik menggabungkan segmentasi DMZ, prinsip Zero Trust, dan desain Wi-Fi yang aman. DMZ membantu memisahkan layanan publik dari LAN, Zero Trust membatasi akses berdasarkan verifikasi dan hak minimum, sedangkan segmentasi jaringan nirkabel membantu memisahkan pengguna internal dan tamu. Ketiganya dapat menjadi dasar perancangan jaringan yang lebih terkontrol dan mudah dimonitor.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Network Security Architecture — Project TKJ</p>
+</footer>
+</body>
+</html>
